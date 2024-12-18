@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLC Research</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .active {
+            display: block;
+        }
+        .nav-buttons {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        .view-study-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .view-study-button a {
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .view-study-button a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div id="slides">
+
+    <div class="slide" id="slide-0" style="background-image: url('slide_1.png');"></div>
+    
+    <div class="slide" id="slide-1" style="background-image: url('slide_2.png');"></div>
+    
+    <div class="slide" id="slide-2" style="background-image: url('slide_3.png');"></div>
+    
+    <div class="slide" id="slide-3" style="background-image: url('slide_4.png');"></div>
+    
+    <div class="slide" id="slide-4" style="background-image: url('slide_5.png');"></div>
+    
+    <div class="slide" id="slide-5" style="background-image: url('slide_6.png');"></div>
+    
+    <div class="slide" id="slide-6" style="background-image: url('slide_7.png');"></div>
+    
+    <div class="slide" id="slide-7" style="background-image: url('slide_8.png');"></div>
+    
+</div>
+
+<div class="nav-buttons">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+</div>
+
+<div class="view-study-button">
+    <a href="https://github.com/VLC-Research/vlc-research.github.io/blob/main/Optimising%20Portfolio%20Allocation.pdf" target="_blank">View Study on GitHub</a>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            currentSlide = (currentSlide + 1) % totalSlides;
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        }
+        showSlide(currentSlide);
+    });
+
+    // Show the first slide initially
+    showSlide(currentSlide);
+</script>
+
+</body>
+</html>
